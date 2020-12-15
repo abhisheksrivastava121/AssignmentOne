@@ -7,7 +7,7 @@ import OtpScreen from "../screen/OtpScreen"
 
 const index = () => {
     return (
-        <Stack.Navigator>   
+        <Stack.Navigator initialRouteName="OTP">   
             <Stack.Screen name="OTP" component={OtpScreen} options={{headerShown:false}}/>
             <Stack.Screen name="OTPVerify" component={OTPVerify} options={{headerShown:false}}/>
         </Stack.Navigator>
