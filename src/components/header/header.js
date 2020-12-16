@@ -7,8 +7,8 @@ const header = (props) =>  {
         console.log(props)
         return (
             <LinearGradient colors={['#6AB944', '#187338']}
-            start={{ x: 0, y: 0 }}
-            end={{ x: 1, y: 1 }}
+            start={{ x: 0, y: 0.5 }}
+            end={{ x: 1, y: 0.5 }}
             style={styles.container}>
                     <View style = {styles.firstCircle} />
                     <View style = {styles.secondCircle} >

@@ -1,5 +1,5 @@
 //import liraries
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import { View, Text,Keyboard, Image} from 'react-native';
 import CustomLinearGradient from '../components/LinearGradient/CustomLinearGradient';
 
@@ -15,20 +15,21 @@ import ScreenContainer from '../components/container/ScreenContainer';
 import CustomTextInput from '../components/CustomTextInput/CustomTextInput';
 import ErrorText from '../components/ErrorText/ErrorText';
 import Header from '../components/header/header';
+import { ScrollView } from 'react-native-gesture-handler';
 
 // create a component
 const OtpScreen = (props) => {
 
     const [mobile,setMobile] = useState('');
     const [mobileErr,setMobileErr] = useState('');
-    
+
     const handleButtonPress = async() => {
         Keyboard.dismiss();
         let status = false;
-        console.log(mobile);
         if(mobile.length > 10) {
             setMobile(mobile.slice(mobile.length));
         }
+        console.log(mobile);
         if (mobile === "") {
             status = true;
             setMobileErr("Please provide your mobile number");
@@ -45,6 +46,7 @@ const OtpScreen = (props) => {
             try {
                 const response = await Helper.get_req(url);
                 if(response.status ===200) {
+                    global.valueArray = [];
                     props.navigation.navigate('OTPVerify',{otp,mobile})
                 }
             }
@@ -65,7 +67,7 @@ const OtpScreen = (props) => {
     }
 
     const getValue = (value) => {
-        setMobile((prevValue)=>prevValue+value);
+        setMobile(global.valueArray.join(""));
         setMobileErr("");
     }
 
@@ -75,15 +77,17 @@ const OtpScreen = (props) => {
 
     return (
         <ScreenContainer>
-            <Header imageURL = {<Image style={{marginBottom: "10%"}} source = {require("../../assets/Group.png")} />} />
-            <View style={styles.container}>
-                <Text style={styles.headingText}>Phone Number Verification</Text>
-                <Text style={styles.subHeadingText}>{"Please enter your mobile number to \nreceive One Time Password"}</Text>
-                <CustomLinearGradient start={start} end={end} gradient={gradient} style={styles.barStyle} />
-                <CustomTextInput size={10} getValue={getValue}/>
-                <ErrorText message={mobileErr} />
-                <CustomButton text="SEND OTP" onPress={handleButtonPress}/>
-            </View>
+            <ScrollView contentContainerStyle={styles.mainContainer} showsVerticalScrollIndicator={false}>
+                <Header imageURL = {<Image resizeMode="contain" style={styles.iconImage} source = {require("../../assets/phone.png")} />} />
+                <View style={styles.container}>
+                    <Text style={styles.headingText}>Phone Number Verification</Text>
+                    <Text style={styles.subHeadingText}>{"Please enter your mobile number to \nreceive One Time Password"}</Text>
+                    <CustomLinearGradient start={start} end={end} gradient={gradient} style={styles.barStyle} />
+                    <CustomTextInput size={10} getValue={getValue}/>
+                    <ErrorText message={mobileErr} />
+                    <CustomButton text="SEND OTP" onPress={handleButtonPress}/>
+                </View>
+            </ScrollView>
         </ScreenContainer>
     );
 };

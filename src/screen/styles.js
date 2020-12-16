@@ -1,10 +1,13 @@
-import { fontScale, normalize } from '../utility/device';
+import { fontScale, heightPercentageToDP, normalize } from '../utility/device';
 import {StyleSheet,Platform} from 'react-native';
 // define your styles
 const styles = StyleSheet.create({
+    mainContainer:{
+        height:heightPercentageToDP('100%'),
+    },
     container: {
         alignItems: 'center',
-        marginTop: "20%"
+        marginTop: "5%"
     },
     headingText:{
         fontSize:fontScale(24),
@@ -23,7 +26,7 @@ const styles = StyleSheet.create({
     barStyle:{
         height:'1%',
         width:'18%',
-        marginBottom:normalize(49)
+        marginBottom:normalize(10)
     },
     buttonConatinerStyle:{
         flexDirection:"row",
@@ -38,6 +41,11 @@ const styles = StyleSheet.create({
         fontSize:fontScale(16),
         color:"#187338",
         fontWeight:"bold"
+    },
+    iconImage:{
+        width:'40%',
+        height:'40%',
+        marginBottom: "10%"
     }
 });
 export default styles;

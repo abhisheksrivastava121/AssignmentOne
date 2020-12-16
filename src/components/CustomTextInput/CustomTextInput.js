@@ -5,6 +5,8 @@ import { TextInput } from 'react-native-gesture-handler';
 import Color from '../../utility/colors'
 import {widthPercentageToDP,heightPercentageToDP,normalize,fontScale,isAndroid} from '../../utility/device'
 
+global.valueArray = [];
+
 // create a component
 const CustomTextInput = (props) => {
     const {size} = props;
@@ -17,8 +19,6 @@ const CustomTextInput = (props) => {
 
     const inputEl = useRef([0,1,2,3,4,5,6,7,8,9]);
     
-    const valueArray = [];
-
     const focusNext = (value,index) => {
         if(index<size-1 && value) {
             inputEl.current[index+1].focus();
@@ -27,7 +27,10 @@ const CustomTextInput = (props) => {
             inputEl.current[index].blur();
         }
         valueArray[index] = value;
-        props.getValue(valueArray.join(""));       
+    }
+
+    const handleEndEditing = () => {
+        props.getValue(valueArray.join(""));
     }
 
     const focusPrevious = (event,index) => {
@@ -103,6 +106,7 @@ const CustomTextInput = (props) => {
                         style={{...styles.container,...borderStyle}}   
                         onFocus={(event)=>handleFocus(event,index)}
                         onBlur={()=>handleBlur(index)}
+                        onEndEditing={handleEndEditing}
                     />
                 )
             })
