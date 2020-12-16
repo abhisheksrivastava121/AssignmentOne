@@ -1,6 +1,6 @@
 //import liraries
 import React, { useState } from 'react';
-import { View, Text,Keyboard } from 'react-native';
+import { View, Text,Keyboard, Image} from 'react-native';
 import CustomLinearGradient from '../components/LinearGradient/CustomLinearGradient';
 
 import styles from './styles';
@@ -13,7 +13,8 @@ import Constant from '../utility/constants';
 import CustomButton from '../components/Button/CustomButton';
 import ScreenContainer from '../components/container/ScreenContainer';
 import CustomTextInput from '../components/CustomTextInput/CustomTextInput';
-import ErrorText from '../components/ErrorText/ErrorText'
+import ErrorText from '../components/ErrorText/ErrorText';
+import Header from '../components/header/header';
 
 // create a component
 const OtpScreen = (props) => {
@@ -74,6 +75,7 @@ const OtpScreen = (props) => {
 
     return (
         <ScreenContainer>
+            <Header imageURL = {<Image style={{marginBottom: "10%"}} source = {require("../../assets/Group.png")} />} />
             <View style={styles.container}>
                 <Text style={styles.headingText}>Phone Number Verification</Text>
                 <Text style={styles.subHeadingText}>{"Please enter your mobile number to \nreceive One Time Password"}</Text>

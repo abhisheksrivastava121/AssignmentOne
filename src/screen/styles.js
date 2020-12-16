@@ -4,6 +4,7 @@ import {StyleSheet,Platform} from 'react-native';
 const styles = StyleSheet.create({
     container: {
         alignItems: 'center',
+        marginTop: "20%"
     },
     headingText:{
         fontSize:fontScale(24),
